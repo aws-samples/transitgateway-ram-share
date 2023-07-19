@@ -1,0 +1,329 @@
+{
+ "Resources": {
+  "TransitGatewayDemo": {
+   "Type": "AWS::EC2::TransitGateway",
+   "Properties": {
+    "AutoAcceptSharedAttachments": "enable",
+    "Description": "This is a test transit gateway",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Transit-Gateway-Demo"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "domainStack/TgwcdkStack/Transit-Gateway-Demo"
+   }
+  },
+  "TGWRAMShare": {
+   "Type": "AWS::RAM::ResourceShare",
+   "Properties": {
+    "Name": "transitgateway-resource-share",
+    "AllowExternalPrincipals": true,
+    "Principals": [
+     "228130378583"
+    ],
+    "ResourceArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:aws:ec2:eu-west-1:857524753102:transit-gateway/",
+        {
+         "Fn::GetAtt": [
+          "TransitGatewayDemo",
+          "Id"
+         ]
+        }
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TestDemoRecourceShare"
+     }
+    ]
+   },
+   "DependsOn": [
+    "TransitGatewayDemo"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "domainStack/TgwcdkStack/TGW-RAM-Share"
+   }
+  },
+  "MyCfnTransitGatewayVpcAttachment": {
+   "Type": "AWS::EC2::TransitGatewayVpcAttachment",
+   "Properties": {
+    "SubnetIds": [
+     "subnet-0060fbe78f8fd394a",
+     "subnet-0699468023ce8835c",
+     "subnet-066d2222f3871980e"
+    ],
+    "TransitGatewayId": {
+     "Fn::GetAtt": [
+      "TransitGatewayDemo",
+      "Id"
+     ]
+    },
+    "VpcId": "vpc-09aa29bf86a8ffe79"
+   },
+   "DependsOn": [
+    "TGWRAMShare"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "domainStack/TgwcdkStack/MyCfnTransitGatewayVpcAttachment"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2WLQQuCQBCFf4v3dSqL6BoeOhYaXWNaJ5zMWdmdRUT87yldgk7v8b33ZXDYwzrBPqS2atI3P2AsFW1jZnQfyWYw5k+5epTAekKlHgfzR26dPeqs1S2JTsZjC/OnoOCit1TW6GlarHPULqr52ZaeO6lY2clkLoPWTlZb2Gxgl7wCc+qjKLcExTc/opk0erIAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "domainStack/TgwcdkStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "TransitGatewayId": {
+   "Value": {
+    "Fn::GetAtt": [
+     "TransitGatewayDemo",
+     "Id"
+    ]
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

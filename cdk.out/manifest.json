@@ -1,0 +1,88 @@
+{
+  "version": "32.0.0",
+  "artifacts": {
+    "TgwcdkStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "TgwcdkStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "TgwcdkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "TgwcdkStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/680a020df097ab25552d29e3c31d98a00054db2f62a40d2c790e9ca9ff6602c8.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "TgwcdkStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "TgwcdkStack.assets"
+      ],
+      "metadata": {
+        "/TgwcdkStack/Transit-Gateway-Demo": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TransitGatewayDemo"
+          }
+        ],
+        "/TgwcdkStack/TGW-RAM-Share": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TGWRAMShare"
+          }
+        ],
+        "/TgwcdkStack/MyCfnTransitGatewayVpcAttachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MyCfnTransitGatewayVpcAttachment"
+          }
+        ],
+        "/TgwcdkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/TgwcdkStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/TgwcdkStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/TgwcdkStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "TgwcdkStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

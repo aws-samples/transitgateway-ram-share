@@ -1,0 +1,159 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "TgwcdkStack": {
+        "id": "TgwcdkStack",
+        "path": "TgwcdkStack",
+        "children": {
+          "Transit-Gateway-Demo": {
+            "id": "Transit-Gateway-Demo",
+            "path": "TgwcdkStack/Transit-Gateway-Demo",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::EC2::TransitGateway",
+              "aws:cdk:cloudformation:props": {
+                "autoAcceptSharedAttachments": "enable",
+                "description": "This is a test transit gateway",
+                "tags": [
+                  {
+                    "key": "Name",
+                    "value": "Transit-Gateway-Demo"
+                  }
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.CfnTransitGateway",
+              "version": "2.87.0"
+            }
+          },
+          "TGW-RAM-Share": {
+            "id": "TGW-RAM-Share",
+            "path": "TgwcdkStack/TGW-RAM-Share",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::RAM::ResourceShare",
+              "aws:cdk:cloudformation:props": {
+                "name": "transitgateway-resource-share",
+                "allowExternalPrincipals": false,
+                "principals": [
+                  "xxxxxxxxxxx"
+                ],
+                "resourceArns": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:ec2:xx-xx-x:xxxxxxxxxxx:transit-gateway/",
+                        {
+                          "Fn::GetAtt": [
+                            "TransitGatewayDemo",
+                            "Id"
+                          ]
+                        }
+                      ]
+                    ]
+                  }
+                ],
+                "tags": [
+                  {
+                    "key": "Name",
+                    "value": "TestDemoRecourceShare"
+                  }
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ram.CfnResourceShare",
+              "version": "2.87.0"
+            }
+          },
+          "MyCfnTransitGatewayVpcAttachment": {
+            "id": "MyCfnTransitGatewayVpcAttachment",
+            "path": "TgwcdkStack/MyCfnTransitGatewayVpcAttachment",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::EC2::TransitGatewayVpcAttachment",
+              "aws:cdk:cloudformation:props": {
+                "subnetIds": [
+                  "subnet-1",
+                  "subnet-2",
+                  "subnet-3"
+                ],
+                "transitGatewayId": {
+                  "Fn::GetAtt": [
+                    "TransitGatewayDemo",
+                    "Id"
+                  ]
+                },
+                "vpcId": "vpc-xxxxxxxxxxxx"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.CfnTransitGatewayVpcAttachment",
+              "version": "2.87.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "TgwcdkStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "TgwcdkStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.87.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "TgwcdkStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.87.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.64"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "TgwcdkStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.87.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "TgwcdkStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.87.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.87.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.64"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.87.0"
+    }
+  }
+}
